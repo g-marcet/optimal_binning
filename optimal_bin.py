@@ -67,6 +67,6 @@ data = #example: np.sort(np.loadtxt('path'))
 
 
 #Example functions
-draw_hist(bin.bins_cs(data, 0)) #Get the optimal bin size and plot the according histogram
-draw_hist(bin.bins_cc(data, 0)) #Get the optimal bin content and plot the according histogram
+draw_hist(bin.bins_cs(data, 0, optimal_bin_cs(data))) #Get the optimal bin size and plot the according histogram
+draw_hist(bin.bins_cc(data, 0, optimal_bin_cc(data))) #Get the optimal bin content and plot the according histogram
         
