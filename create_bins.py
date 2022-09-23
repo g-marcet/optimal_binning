@@ -1,6 +1,6 @@
 ######
 # create_bins module
-# the functions in this module 
+# the functions in this module generate bin edges and content based on the given parameters and function
 
 
 import numpy as np
