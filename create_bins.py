@@ -1,7 +1,7 @@
 ######
 # create_bins module
 # the functions in this module generate bin edges and content based on the given parameters and function
-
+######
 
 import numpy as np
 from math import floor
@@ -30,7 +30,7 @@ def bins_cs(lightcurve, offset, bin_size):
 # in a numpy.histogram format.
 # lightcurve: Data used, must be ordered and formated as a numpy array with one axis
 # offset: offset in number of events of the first edge, used in variance reduction
-# bin_size: size of the bins
+# bin_num: number of bins
 ######
 
 def bins_cc(lightcurve, offset, bin_num):
@@ -50,5 +50,11 @@ def bins_cc(lightcurve, offset, bin_num):
     edges.append(lightcurve[-1])
     return np.histogram(lightcurve, edges)
 
+######
+# shimazaki and shinomoto bins: Outputs a histogram using the original shimazaki and shinomoto method
+# lightcurve: Data used, must be ordered and formated as a numpy array with one axis
+# bin_num: number of bins
+######
 
-
+def shim_shin_bin(lightcurve, bin_num):
+    return np.histogram(lightcurve, np.linspace(lightcurve[0]- 0.001 * (lightcurve[-1]-lightcurve[0]), lightcurve[-1] + 0.001 * (lightcurve[-1]-lightcurve[0]), bin_num + 1))
