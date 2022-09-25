@@ -58,6 +58,26 @@ def optimal_bin_cc(lightcurve, bin_range = [1,300,1], draw = True):
     if draw == True:
         draw_cost_cc(cost, np.divide(len(lightcurve), np.arange(bin_range[0], bin_range[1], bin_range[2])))
     return opt_bin
+
+######
+# Function that implements the original method and algorithm from Shimazaki and Shinomoto
+# lightcurve: Data used, must be ordered and formated as a numpy array with one axis
+# bin_range: range of bins studied, must be formated as a 3 item list, [start, end, step] 
+# draw: True if a plot of the cost function is wanted
+######
+
+
+def optimal_shim_shin(lightcurve, bin_range = [1,500,1], draw = True):
+    cost = []
+
+    for bin_num in np.arange(bin_range[0], bin_range[1], bin_range[2]):
+        cost.append(cost_f(lightcurve, bin.shim_shin_bin(lightcurve, bin_num)))
+    opt_width = bin_range[2]*cost.index(min(cost))+bin_range[0]
+    print('Optimal bin number: ', opt_width)
+    if draw == True:
+        draw_cost_cs(cost, bin_range)
+
+    return opt_width
     
 
 # Define the lightcurve data. It must be formated as a sorted numpy array with one axis
@@ -69,4 +89,5 @@ data = #example: np.sort(np.loadtxt('path'))
 #Example functions
 draw_hist(bin.bins_cs(data, 0, optimal_bin_cs(data))) #Get the optimal bin size and plot the according histogram
 draw_hist(bin.bins_cc(data, 0, optimal_bin_cc(data))) #Get the optimal bin content and plot the according histogram
+draw_hist(bin.shim_shin_bin(data, optimal_shim_shin(data))) #Get the optimal bin number and plot using shimazaki and shinomoto original method
         
